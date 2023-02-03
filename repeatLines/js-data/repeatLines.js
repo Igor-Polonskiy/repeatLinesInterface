@@ -21,7 +21,7 @@ function renderRepeateLines(taskId, data) {
   const taskWrapper = document.getElementById(`${taskId}`)
   const lineField = taskWrapper.querySelector('.repeatField')
   let isGameStart = false;
-  const textarea = taskWrapper.querySelector('textarea')
+  const textarea = taskWrapper.querySelector('.object')
 
   renderCheckPanel(taskWrapper, true);
   const { btnReset, btnTest, controlsBox, infoBox } = getCheckPanelElements(taskWrapper);
