@@ -1,6 +1,4 @@
 import {
-  checkingAnswerPositive,
-  checkingAnswerNegative,
   checkingAnswerReset,
   toggleOpacityAndEventsElement,
   renderCheckPanel,
@@ -19,9 +17,15 @@ import {
 
 function renderRepeateLines(taskId, data) {
   const taskWrapper = document.getElementById(`${taskId}`)
-  const lineField = taskWrapper.querySelector('.repeatField')
+  const lineField = taskWrapper.querySelector('.repeatFieldContainer')
   let isGameStart = false;
   const textarea = taskWrapper.querySelector('.object')
+  const picture = taskWrapper.querySelector('.picture')
+  const sizes = taskWrapper.querySelectorAll('.size')
+  let active = taskWrapper.querySelector('.active')
+  let sqares = taskWrapper.querySelectorAll('.repeatField')
+  let currentwrapper = taskWrapper.querySelector('.repeatField1')
+  let currentSVG = currentwrapper.innerHTML
 
   renderCheckPanel(taskWrapper, true);
   const { btnReset, btnTest, controlsBox, infoBox } = getCheckPanelElements(taskWrapper);
@@ -30,6 +34,20 @@ function renderRepeateLines(taskId, data) {
   lineField.addEventListener('click', fillLine)
   btnReset.addEventListener('click', resetTask)
   btnTest.addEventListener('click', checkTask)
+
+  sizes.forEach((item,index) => {
+    item.addEventListener('click', () => {
+     
+        active.classList.remove('active')
+        item.classList.add('active')
+        sqares.forEach(item=>item.classList.add('noDisplay'))
+        sqares[index].classList.remove('noDisplay')
+        currentwrapper = sqares[index]
+        active = item
+        resetTask()
+        currentSVG = currentwrapper.innerHTML
+    })
+  })
 
   function fillLine(e) {
     if (!isGameStart) {
@@ -51,8 +69,14 @@ function renderRepeateLines(taskId, data) {
     lines.forEach(item => {
       arr.push(`"${item.getAttribute('id')}"`)
     })
-    console.log(arr)
+    console.log(arr, taskWrapper)
     textarea.innerText = arr
+    picture.innerHTML = currentSVG
+    var blob = new Blob([currentwrapper.innerHTML],
+      { type: "svg" });
+    saveAs(blob, "picture.svg");
+
+
     /*
     let lines = taskWrapper.querySelectorAll('.repeatLines_st3')
     let winVar = 0
@@ -75,7 +99,8 @@ function renderRepeateLines(taskId, data) {
   }
 
   function resetTask() {
-    textarea.innerText = ''
+    textarea.innerText = '';
+    picture.innerHTML = '';
     let lines = taskWrapper.querySelectorAll('.line')
     lines.forEach(item => item.classList.remove('repeatLines_st3'))
     lines.forEach(item => item.classList.remove('repeatLines_st4'))

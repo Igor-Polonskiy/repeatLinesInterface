@@ -27,3 +27,20 @@ cursor: pointer;
     stroke: lightpink;
     stroke-width: 10;
 }
+.sizes{
+    display: flex;
+    justify-content: space-around;
+}
+.size{
+    border-radius: 12px;
+    background-color: aqua;
+    cursor: pointer;
+    font-size: 20px;
+    padding:0 20px;
+}
+.active{
+    background-color:lightgreen;
+}
+.noDisplay{
+    display: none;
+}

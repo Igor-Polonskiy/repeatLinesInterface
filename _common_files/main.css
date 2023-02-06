@@ -49,11 +49,11 @@ h4 {
 }
 
 .trainerTaskWrapper {
-  border: 1px solid black;
-  /* padding: 5px; */
+ /* border: 1px solid black;
+   padding: 5px; */
 }
 
-@media screen and (max-width: 1920px) {
+/*@media screen and (max-width: 1920px) {
   .trainerTaskWrapper {
     width: 840px;
     height: 664px;
@@ -70,4 +70,4 @@ h4 {
     width: 620px;
     height: 496px;
   }
-}
+}*/
